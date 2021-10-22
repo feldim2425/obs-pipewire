@@ -17,17 +17,3 @@
  * along with obs-pipewire.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <obs-module.h>
-#include "source.h"
-
-OBS_DECLARE_MODULE()
-OBS_MODULE_USE_DEFAULT_LOCALE("obs-pipewire", "en-US")
-
-
-bool obs_module_load(void) {
-    struct obs_source_info info;
-    pwsrc_get_sourceinfo(&info);
-    obs_register_source(&info);
-    
-    return true;
-}

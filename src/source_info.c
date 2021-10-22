@@ -17,17 +17,22 @@
  * along with obs-pipewire.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <obs-module.h>
-#include "source.h"
+#include "source_info.h"
 
-OBS_DECLARE_MODULE()
-OBS_MODULE_USE_DEFAULT_LOCALE("obs-pipewire", "en-US")
+static const char* pwsrc_get_name(void *unused){
+    UNUSED_PARAMETER(unused);
+    return obs_module_text("Pipewire Video Source");
+}
 
-
-bool obs_module_load(void) {
-    struct obs_source_info info;
-    pwsrc_get_sourceinfo(&info);
-    obs_register_source(&info);
+static void* pwsrc_create(obs_data_t *settings, obs_source_t *source){
     
-    return true;
+}
+
+void pwsrc_get_sourceinfo(struct obs_source_info *info){
+    info->id = "pipewire-video-source",
+    info->type = OBS_SOURCE_TYPE_INPUT,
+    info->output_flags = OBS_SOURCE_ASYNC_VIDEO,
+
+    info->get_name = pwsrc_get_name;
+    info->create = pwsrc_create;
 }

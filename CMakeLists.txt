@@ -22,6 +22,8 @@ find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
 
 add_library(obs-pipewire SHARED 
     "src/main.c"
+    "src/source_info.c"
+    "src/pipeclient.c"   
 )
 target_include_directories(obs-pipewire PUBLIC "src")
 
