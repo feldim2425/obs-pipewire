@@ -18,10 +18,36 @@
 #pragma once
 
 #include <obs-module.h>
+#include <pipewire/pipewire.h>
+#include <spa/param/video/format-utils.h>
 
-struct pw_client_data
+struct pwc_data_st
 {
     obs_data_t* settings;
     obs_source_t* source;
+
+    struct pw_thread_loop *thread_loop;
+	struct pw_context *context;
+
+	struct pw_core *core;
+	struct spa_hook core_listener;
+
+	struct pw_stream *stream;
+	struct spa_hook stream_listener;
+	struct spa_video_info format;
+
 };
+
+typedef struct pwc_data_st pwc_data_t;
+typedef void (*pw_vframe_cb)();
+
+pwc_data_t* pwc_create(const char* name);
+
+void pwc_destroy(pwc_data_t* data);
+
+void pwc_deactivate(pwc_data_t* data);
+
+void pwc_activate(pwc_data_t* data);
+
+void pwc_set_framecallback();
 

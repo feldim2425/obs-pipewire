@@ -18,6 +18,7 @@
  */
 
 #include "source_info.h"
+#include "pipeclient.h"
 
 static const char* pwsrc_get_name(void *unused){
     UNUSED_PARAMETER(unused);
@@ -25,9 +26,11 @@ static const char* pwsrc_get_name(void *unused){
 }
 
 static void* pwsrc_create(obs_data_t *settings, obs_source_t *source){
+    return pwc_create("test");
 }
 
 static void pwsrc_destroy(void* ptr){
+    pwc_destroy(ptr);
 }
 
 static unsigned int pwsrc_get_width(void* ptr){
