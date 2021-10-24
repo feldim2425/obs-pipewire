@@ -18,16 +18,21 @@
  */
 
 #include <obs-module.h>
-#include "source.h"
+#include "source_info.h"
 
 OBS_DECLARE_MODULE()
 OBS_MODULE_USE_DEFAULT_LOCALE("obs-pipewire", "en-US")
+OBS_MODULE_AUTHOR("feldim2425")
 
 
 bool obs_module_load(void) {
-    struct obs_source_info info;
+    struct obs_source_info info = {};
     pwsrc_get_sourceinfo(&info);
     obs_register_source(&info);
     
     return true;
+}
+
+void obs_module_unload(void){
+    
 }

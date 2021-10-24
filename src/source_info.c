@@ -25,7 +25,46 @@ static const char* pwsrc_get_name(void *unused){
 }
 
 static void* pwsrc_create(obs_data_t *settings, obs_source_t *source){
-    
+}
+
+static void pwsrc_destroy(void* ptr){
+}
+
+static unsigned int pwsrc_get_width(void* ptr){
+    return 0;
+}
+
+static unsigned int pwsrc_get_height(void* ptr){
+    return 0;
+}
+
+static obs_properties_t* pwsrc_get_properties(void* ptr){
+    obs_properties_t* props = obs_properties_create();
+    return props;
+}
+
+static void pwsrc_default_properties(obs_data_t* settings){
+
+}
+
+static void pwsrc_tick(void* ptr, float seconds){
+
+}
+
+static void pwsrc_src_activate(void* ptr){
+
+}
+
+static void pwsrc_src_deactivate(void* ptr){
+
+}
+
+static void pwsrc_src_show(void* ptr){
+
+}
+
+static void pwsrc_src_hide(void* ptr){
+
 }
 
 void pwsrc_get_sourceinfo(struct obs_source_info *info){
@@ -35,4 +74,17 @@ void pwsrc_get_sourceinfo(struct obs_source_info *info){
 
     info->get_name = pwsrc_get_name;
     info->create = pwsrc_create;
+    info->destroy = pwsrc_destroy;
+
+    info->video_tick = pwsrc_tick;
+    info->get_height = pwsrc_get_height;
+    info->get_width = pwsrc_get_width;
+
+    //info->get_defaults = pwsrc_default_properties;
+    //info->get_properties = pwsrc_get_properties;
+
+    info->activate = pwsrc_src_activate;
+    info->deactivate = pwsrc_src_deactivate;
+    info->show = pwsrc_src_show;
+    info->hide = pwsrc_src_hide;
 }
